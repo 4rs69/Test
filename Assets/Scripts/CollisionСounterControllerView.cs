@@ -9,7 +9,8 @@ public class CollisionСounterControllerView : MonoBehaviour
    [UsedImplicitly]
    private void СountСollisions()
    {
-      _collisionScoreView.Display(_collisionCounterController.CollisionCount);
+      var collisonCount = _collisionCounterController.CollisionCount;
+      _collisionScoreView.Display( collisonCount);
    }
 
    public void ResetСollisionCount()
