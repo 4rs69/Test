@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class CollisionСounterControllerView : MonoBehaviour
@@ -6,17 +5,25 @@ public class CollisionСounterControllerView : MonoBehaviour
    [SerializeField] private CollisionScoreView _collisionScoreView;
    [SerializeField] private CollisionCounterController _collisionCounterController;
 
-   [UsedImplicitly]
+   private void Start()
+   {
+      _collisionCounterController._objectCollision += СountСollisions;
+   }
+
    private void СountСollisions()
    {
-      var collisonCount = _collisionCounterController.CollisionCount;
-      _collisionScoreView.Display( collisonCount);
+      var collisionCount = _collisionCounterController.GetСollisionsСount();
+      _collisionScoreView.Display(collisionCount);
    }
 
    public void ResetСollisionCount()
    {
-      _collisionCounterController.CollisionCount = 0;
-      _collisionScoreView.Display(_collisionCounterController.CollisionCount);
+      var resetCount = _collisionCounterController.GetСollisionCountReset();
+      _collisionScoreView.Display(resetCount);
    }
-   
+
+   private void OnDestroy()
+   {
+      _collisionCounterController._objectCollision -= СountСollisions;
+   }
 }

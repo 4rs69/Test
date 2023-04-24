@@ -1,14 +1,24 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CollisionCounterController : MonoBehaviour
 {
-    public UnityEvent<int> _objectCollision;
-    public int CollisionCount { get; set; }
+    public Action _objectCollision;
+    private int _collisionCount;
 
     private void OnCollisionEnter(Collision collision)
     {
-        CollisionCount++;
-        _objectCollision?.Invoke(CollisionCount);
+        _collisionCount++;
+        _objectCollision?.Invoke();
+    }
+    
+    public int GetСollisionCountReset()
+    {
+        return _collisionCount = 0;
+    }
+    
+    public int GetСollisionsСount()
+    {
+        return _collisionCount;
     }
 }
